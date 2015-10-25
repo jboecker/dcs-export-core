@@ -1,7 +1,14 @@
 # Setup
 
-* Edit C:\Program Files\Eagle Dynamics\DCS World\Scripts\Aircrafts\_Common\KNEEBOARD\define_kneeboard_device
-* Edit Export.lua
+* Copy the repository contents to `%USERPROFILE%\Saved Games\DCS\Scripts\export-core`
+* Edit `C:\Program Files\Eagle Dynamics\DCS World\Scripts\Aircrafts\_Common\COCKPIT\KNEEBOARD\declare_kneeboard_device.lua` and append the following line:
+````lua
+creators[147] = {"avLuaDevice", lfs.writedir() .. "Scripts\\export-core\\ExportDevice.lua"}
+````
+* Edit or create `%USERPROFILE%\Saved Games\DCS\Scripts\Export.lua` and append the following line:
+````lua
+dofile(lfs.writedir()..[[Scripts\export-core\ExportCore.lua]])
+````
 
 # Ports and Device IDs
 
