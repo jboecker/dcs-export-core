@@ -50,7 +50,7 @@ function _M.newUnit(unitType)
 	_M.exportedLuaFunctions = {}
 	_M.KVS.reset()
 	_M.sendMessage({
-		["event"] = "new_unit",
+		["msg_type"] = "new_unit",
 		["type"] = unitType
 	})
 end
