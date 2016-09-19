@@ -19,7 +19,7 @@ def onNewUnit(unitName):
 	print("new unit: %s" % unitName)
 	if unitName == "A-10C":
 		sendMessage(
-			{"action":"subscribe", "keys":["e182"]}
+			{"action":"subscribe", "keys":["e182", "c404"]}
 		)
 
 
@@ -42,4 +42,6 @@ while True:
 		if msg["event"] == "newdata":
 			if "e182" in msg["data"] and msg["data"]["_UNITTYPE"] == "A-10C":
 				print("New A-10C speed brake position: %f" % msg["data"]["e182"])
+			if "c404" in msg["data"] and msg["data"]["_UNITTYPE"] == "A-10C":
+				print("A-10C Master Caution light is now "+("on" if msg["data"]["c404"] else "off"))
 				
