@@ -1,18 +1,9 @@
 # Setup
 
-* Copy the repository contents to `%USERPROFILE%\Saved Games\DCS\Scripts\export-core`
-* Edit `C:\Program Files\Eagle Dynamics\DCS World\Scripts\Aircrafts\_Common\COCKPIT\KNEEBOARD\declare_kneeboard_device.lua` and append the following line:
-````lua
-creators[147] = {"avLuaDevice", lfs.writedir() .. "Scripts\\export-core\\ExportDevice.lua"}
-````
-* Edit or create `%USERPROFILE%\Saved Games\DCS\Scripts\Export.lua` and append the following line:
-````lua
-dofile(lfs.writedir()..[[Scripts\export-core\ExportCore.lua]])
-````
+* Copy the `DcsExportCoreGameGUI.lua` and  the `DcsExportCore` folder to `%USERPROFILE%\Saved Games\DCS\Scripts\`
 
-# Ports and Device IDs
+# Network Ports
 
-* Device ID 147 for the export device
 * UDP 12823 on localhost to get data from device environment to Export.lua environment
 * Export.lua sends to UDP mutlicast 239.255.50.10:12800
 * Export.lua listens on TCP 12800 and UDP 12801
