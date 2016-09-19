@@ -10,7 +10,7 @@ function ExportCore.init()
 	dofile(lfs.writedir()..[[Scripts\export-core\KeyValueStore.lua]])
 	dofile(lfs.writedir()..[[Scripts\export-core\Protocol.lua]])
 	ExportCore.KVS.init({sendMessage = ExportCore.NET.sendMessage})
-	ExportCore.NET.init({processMessage = ExportCore.PROTOCOL.processMessage, processExportDevicePacket = ExportCore.PROTOCOL.processExportDevicePacket})
+	ExportCore.NET.init({processMessage = ExportCore.PROTOCOL.processMessage})
 	ExportCore.PROTOCOL.init({sendMessage = ExportCore.NET.sendMessage, KVS = ExportCore.KVS})
 end
 

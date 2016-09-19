@@ -200,8 +200,6 @@ end
 function _M.init(args)
 	assert(type(args.processMessage) == "function")
 	_M.processMessage = args.processMessage
-	assert(type(args.processExportDevicePacket) == "function")
-	_M.processExportDevicePacket = args.processExportDevicePacket
 
 	-- set up UDP listener for ExportDevice
 	_M.exportDeviceListener = socket.udp()
@@ -224,12 +222,6 @@ function _M.stop()
 end
 
 function _M.step()
-	while true do
-		local data = _M.exportDeviceListener:receive()
-		if not data then break end
-		_M.processExportDevicePacket(data)
-	end
-	
 	for _, c in pairs(_M.connections) do
 		if c.step then c:step() end
 	end

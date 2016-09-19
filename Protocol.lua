@@ -41,12 +41,18 @@ function _M.sendUpdate()
 		end
 	end
 	
+	for k, arg_num in pairs(_M.exportedExternalModelArguments) do
+		local arg = LoGetAircraftDrawArgumentValue(arg_num)
+		_M.KVS.set(k, arg)
+	end
+	
 	_M.KVS.sendUpdates()
 	
 end
 
 function _M.newUnit(unitType)
 	_M.exportedCockpitArguments = {}
+	_M.exportedExternalModelArguments = {}
 	_M.exportedLuaFunctions = {}
 	_M.KVS.reset()
 	_M.sendMessage({
@@ -64,24 +70,11 @@ function _M.processMessage(msg)
 				_M.KVS.dirty[key] = true
 			end
 			if key:match("^e.*") then
-				local exportDev = GetDevice(147)
-				if exportDev then
-					exportDev:SetCommand(0, tonumber(key:sub(2)))
-					_M.KVS.data[key] = nil -- ensure it is sent in the next update even if already subscribed
-				end
+				_M.exportedExternalModelArguments[key] = tonumber(key:sub(2))
+				_M.KVS.dirty[key] = true
 			end
 		end
 	end
-end
-
-function _M.processExportDevicePacket(data)
-		if data:sub(1,9)=="NEW_UNIT=" then
-			_M.newUnit(data:sub(10))
-		else		
-			for key, value in data:gmatch("(%d+)=([^\n]+)\n") do
-				_M.KVS.set("e"..key, tonumber(value))
-			end
-		end
 end
 
 function _M.step()
