@@ -26,20 +26,20 @@ def onNewUnit(unitName):
 # wait for first update event to get current aircraft
 while True:
 	msg = json.loads(sf.readline())
-	if "event" in msg and msg["event"] == "new_unit":
+	if "msg_type" in msg and msg["msg_type"] == "new_unit":
 		onNewUnit(msg["type"])
 		break
-	if "event" in msg and "_UNITTYPE" in msg["data"]:
+	if "msg_type" in msg and "_UNITTYPE" in msg["data"]:
 		onNewUnit(msg["data"]["_UNITTYPE"])
 		break
 		
 # process incoming messages
 while True:
 	msg = json.loads(sf.readline())
-	if "event" in msg:
-		if msg["event"] == "new_unit":
+	if "msg_type" in msg:
+		if msg["msg_type"] == "new_unit":
 			onNewUnit(msg["type"])
-		if msg["event"] == "newdata":
+		if msg["msg_type"] == "newdata":
 			if "e182" in msg["data"] and msg["data"]["_UNITTYPE"] == "A-10C":
 				print("New A-10C speed brake position: %f" % msg["data"]["e182"])
 			if "c404" in msg["data"] and msg["data"]["_UNITTYPE"] == "A-10C":
