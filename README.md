@@ -35,12 +35,12 @@ Examples:
 # Messages from DCS
 
 ## newdata
-Example: `{"event":"newdata", "data":{"_UNITTYPE":"A-10C","c404":0}}`
+Example: `{"msg_type":"newdata", "data":{"_UNITTYPE":"A-10C","c404":0}}`
 
-If the "event" attribute is "newdata", the "data" attribute is an object that contains a key => value mapping of all keys that have changed since the last "newdata" event.
+If the "msg_type" attribute is "newdata", the "data" attribute is an object that contains a key => value mapping of all keys that have changed since the last "newdata" event.
 
 ## new_unit
-Example: `{"event":"new_unit","type":"A-10C"}`
+Example: `{"msg_type":"new_unit","type":"A-10C"}`
 
 When a new unit is entered, this event is sent out. The "type" attribute lists the unit type. "type" can also be "NONE" when there is no active unit (e.g. spectator mode in multiplayer).
 

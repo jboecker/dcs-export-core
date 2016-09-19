@@ -23,7 +23,7 @@ end
 function _M.sendUpdates()
 	local MAX_UPDATES_AT_ONCE = 100
 	local datacount = 0
-	msg = { event="newdata", data = {} }
+	msg = { msg_type="newdata", data = {} }
 	for k, _ in pairs(_M.dirty) do
 		if datacount >= MAX_UPDATES_AT_ONCE then
 			_M.sendMessage(msg)
